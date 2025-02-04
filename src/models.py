@@ -17,3 +17,26 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+class Favorite(db.Model):
+    __tablename__ = 'favorite'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id= db.Column(db.Integer, db.ForeignKey('user.id'))
+    planet_id= db.Column(db.Integer, db.ForeignKey('planet.id'))
+    character_id= db.Column(db.Integer, db.ForeignKey('character.id'))
+    user= db.relationship(User)
+
+class Planet(db.Model):
+    __tablename__ = 'planet'
+    id = db.Column(db.Integer, primary_key=True)
+    planets= db.Column(db.Integer, db.ForeignKey('planet.id'))
+    planet= db.relationship(Favorite)
+
+class Charachter(db.Model):
+    __tablename__ = 'character'
+    id = db.Column(db.Integer, primary_key=True)
+    charachters= db.Column(db.Integer, db.ForeignKey('character.id'))
+    character= db.relationship(Favorite)
+
+    def to_dict(self):
+        return {}
