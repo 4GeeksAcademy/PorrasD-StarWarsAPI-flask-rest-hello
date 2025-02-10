@@ -15,7 +15,6 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, its a security breach
         }
 
 class Favorite(db.Model):
@@ -32,10 +31,10 @@ class Planet(db.Model):
     planets= db.Column(db.Integer, db.ForeignKey('planet.id'))
     planet= db.relationship(Favorite)
 
-class Charachter(db.Model):
+class Character(db.Model):
     __tablename__ = 'character'
     id = db.Column(db.Integer, primary_key=True)
-    charachters= db.Column(db.Integer, db.ForeignKey('character.id'))
+    characters= db.Column(db.Integer, db.ForeignKey('character.id'))
     character= db.relationship(Favorite)
 
     def to_dict(self):
